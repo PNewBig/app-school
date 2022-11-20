@@ -1,23 +1,30 @@
 import 'package:flutter/material.dart';
-import 'Widget/InputTextField.dart';
-import 'Widget/LabelForgetPAS.dart';
-import 'Widget/LabelText.dart';
-import 'Widget/background.dart';
-
-class LoginPage extends StatefulWidget {
-  const LoginPage({super.key});
+import '../Widget/InputTextField.dart';
+import '../Widget/LabelForgetPAS.dart';
+import '../Widget/LabelText.dart';
+import '../Widget/background.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+class LoginScreen extends StatefulWidget {
+  const LoginScreen({super.key});
 
   @override
-  State<LoginPage> createState() => _LOginPageState();
+  State<LoginScreen> createState() => _LoginScreenState();
 }
-
-class _LOginPageState extends State<LoginPage> {
+class _LoginScreenState extends State<LoginScreen> {
+  void _SubmitForm(String email, String password,) async {
+    final UserCredential authResult;
+    final auth = FirebaseAuth.instance;
+    try{
+      print(email);
+      print(password);
+      await auth.signInWithEmailAndPassword(email: email, password: password);
+    }catch(error){
+      print(error.toString());
+    }
+ }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      //backgroundColor: Colors.blueGrey,
-      //background here:
-
       body: Stack(
         children: [
           Container(
@@ -41,50 +48,42 @@ class _LOginPageState extends State<LoginPage> {
           Positioned(
             top: 180,
             child: Container(
-              width: 400,
-              height: 600,
-              child: Column(children: [
-                //Title text
-                Text(
-                  'Sign in',
-                  style: TextStyle(
-                    color: Color.fromARGB(255, 232, 232, 232),
-                    fontWeight: FontWeight.bold,
-                    fontSize: 24,
+                width: 400,
+                height: 600,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                  //Title text
+                  Text(
+                    'Sign in',
+                    style: TextStyle(
+                      color: Color.fromARGB(255, 232, 232, 232),
+                      fontWeight: FontWeight.bold,
+                      fontSize: 24,
+                    ),
                   ),
-                ),
-                // SizedBox(height: 20),
-
-                Text(
-                  'Welcome Back',
-                  style: TextStyle(
-                    color: Color.fromARGB(255, 232, 232, 232),
-                    fontWeight: FontWeight.bold,
-                    fontSize: 24,
+                  // SizedBox(height: 20),
+                  Text(
+                    'Welcome Back',
+                    style: TextStyle(
+                      color: Color.fromARGB(255, 232, 232, 232),
+                      fontWeight: FontWeight.bold,
+                      fontSize: 24,
+                    ),
                   ),
-                ),
-                SizedBox(height: 10),
+                 SizedBox(height: 10),
 
-                Text(
-                  'You have been missed',
-                  style: TextStyle(
-                    color: Color.fromARGB(255, 232, 232, 232),
-                    fontWeight: FontWeight.bold,
-                    fontSize: 25,
+                  Text(
+                    'You have been missed',
+                    style: TextStyle(
+                      color: Color.fromARGB(255, 232, 232, 232),
+                      fontWeight: FontWeight.bold,
+                      fontSize: 25,
+                    ),
                   ),
-                ),
-
-                InputTexfield(
-                  text: 'Email',
-                ),
-                InputTexfield(
-                  text: 'Password',
-                ),
-                LabelPas(
-                  labelPass: 'Forgot password?',
-                ),
-              ]),
-            ),
+                  InputTexfield(functionHandler: _SubmitForm),
+                ]),
+              ),
           ),
         ],
       ),

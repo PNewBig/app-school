@@ -32,7 +32,7 @@ class _HomePageState extends State<HomePage> {
                     width: 50,
                     child: CircleAvatar(
                         radius: 40,
-                        backgroundImage: AssetImage("Assets/Images/user.png"))),
+                        backgroundImage: AssetImage("assets/images/august.png"))),
                 Container(
                     margin: const EdgeInsets.all(10),
                     child: Text("Vanlakhan INSYXIENGMAI",
@@ -42,12 +42,12 @@ class _HomePageState extends State<HomePage> {
 
         //part of showing the classroom available
         Container(
-            margin: const EdgeInsets.only(top: 5),
+            margin: const EdgeInsets.only(top: 20),
             child:
                 Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
               Container(
                   margin:
-                      const EdgeInsets.symmetric(horizontal: 30, vertical: 20),
+                      const EdgeInsets.symmetric(horizontal: 30, vertical: 5),
                   child: Text("My Classes",
                       style: TextStyle(
                           fontSize: 18, fontWeight: FontWeight.normal))),
@@ -55,25 +55,25 @@ class _HomePageState extends State<HomePage> {
                   scrollDirection: Axis.horizontal,
                   child: Container(
                      width: 400,
-                      height: 118,
+                      height: 140,
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [BoxClassroom("C programming"), BoxClassroom("Data mining")],
                       )))
             ])),
         Container(
-          margin: const EdgeInsets.only(top: 5),
+          margin: const EdgeInsets.only(top: 10),
           child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
               Container(
                   margin:
-                      const EdgeInsets.symmetric(horizontal: 30, vertical: 20),
+                      const EdgeInsets.symmetric(horizontal: 30, vertical: 5),
                   child: Text("Class Teacher",
                       style: TextStyle(
                           fontSize: 18, fontWeight: FontWeight.normal))),
               SingleChildScrollView(
                   scrollDirection: Axis.horizontal,
                   child: Container(
-                      height: 118,
+                      height: 140,
                       width: 400,
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
@@ -85,9 +85,7 @@ class _HomePageState extends State<HomePage> {
   }
 
   Widget BoxClassroom(String subject_name) {
-    return Container(
-      height: 170,
-      child: Stack(
+    return Stack(
         children: [
           Container(
               margin: const EdgeInsets.symmetric(horizontal: 10),
@@ -103,14 +101,16 @@ class _HomePageState extends State<HomePage> {
             left: 50,
             right: 50,
             child: CircleAvatar(
-                backgroundColor: Colors.white,
+                backgroundColor: Colors.black,
                 child: IconButton(
                   icon: Icon(Icons.arrow_forward),
                   onPressed: () {},
                 )),
           ),
         ],
-      ),
-    );
+        fit: StackFit.loose,
+        clipBehavior: Clip.none,
+      );
+    
   }
 }
